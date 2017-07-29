@@ -48,11 +48,9 @@ n() {
 # Find a note by title.
 nf() {
     if init; then
-        if [ -z "$1" ]; then
-            ls -lhtr --color=always "$NOTEDIR"
-        else
-            ls -lhtr --color=always "$NOTEDIR" | grep -i --color=always "$1"
-        fi
+        cd "$NOTEDIR"
+        find . -iname "*$1*"
+        cd "$OLDPWD"
     else
         return $?
     fi
