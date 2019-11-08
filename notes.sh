@@ -38,7 +38,14 @@ n() {
             ls -lhtr --color=always "$NOTEDIR"
         # If a note was given, open it.
         else
-            $EDITOR "$(buildfile "$NOTEDIR"/"$1")"
+            filepath="$(buildfile "$NOTEDIR"/"$1")"
+            filename=$(basename $filepath)
+            fileext=${filename##*.}
+            if echo "$NOTEXDGEXT" | grep -qw "$fileext"; then
+                xdg-open "$filepath"
+            else
+                $EDITOR "$filepath"
+            fi
         fi
     else
         return $?
