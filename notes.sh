@@ -67,7 +67,7 @@ nf() {
 ns() {
     if init; then
         cd "$NOTEDIR"
-        grep -rin --exclude-dir=.git --color=always "$1"
+        grep -Rin --exclude-dir=.git --color=always "$1"
         cd "$OLDPWD"
     else
         return $?
